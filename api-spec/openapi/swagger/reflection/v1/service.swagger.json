@@ -17,7 +17,7 @@
   ],
   "paths": {
     "/v1/info": {
-      "get": {
+      "post": {
         "summary": "The reflection service is structured as a bidirectional stream, ensuring\nall related requests go to a single server.",
         "operationId": "ReflectionService_GetInfo",
         "responses": {
@@ -45,52 +45,13 @@
         },
         "parameters": [
           {
-            "name": "host",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "fileByFilename",
-            "description": "Find a proto file by the file name.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "fileContainingSymbol",
-            "description": "Find the proto file that declares the given fully-qualified symbol name.\nThis field should be a fully-qualified symbol name\n(e.g. \u003cpackage\u003e.\u003cservice\u003e[.\u003cmethod\u003e] or \u003cpackage\u003e.\u003ctype\u003e).",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "fileContainingExtension.containingType",
-            "description": "Fully-qualified type name. The format should be \u003cpackage\u003e.\u003ctype\u003e",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "fileContainingExtension.extensionNumber",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "allExtensionNumbersOfType",
-            "description": "Finds the tag numbers used by all known extensions of the given message\ntype, and appends them to ExtensionNumberResponse in an undefined order.\nIts corresponding method is best-effort: it's not guaranteed that the\nreflection service will implement this method, and it's not guaranteed\nthat this method will provide all extensions. Returns\nStatusCode::UNIMPLEMENTED if it's not implemented.\nThis field should be a fully-qualified type name. The format is\n\u003cpackage\u003e.\u003ctype\u003e",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "listServices",
-            "description": "List the full names of registered services. The content will not be\nchecked.",
-            "in": "query",
-            "required": false,
-            "type": "string"
+            "name": "body",
+            "description": "The message sent by the client when calling GetInfo method. (streaming inputs)",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1GetInfoRequest"
+            }
           }
         ],
         "tags": [

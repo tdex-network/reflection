@@ -29,7 +29,8 @@ service ReflectionService {
   // all related requests go to a single server.
   rpc GetInfo(stream GetInfoRequest) returns (stream GetInfoResponse) {
     option (google.api.http) = {
-      get: "/v1/info"
+      post: "/v1/info",
+      body: "*"
     };
   }
 }
